@@ -1,5 +1,11 @@
+
+resource "aws_kms_key" "a" {
+  description             = "KMS key 1"
+  deletion_window_in_days = 10
+}
 resource "aws_sagemaker_notebook_instance" "notebook_instance" {
   name                    = var.notebook_instance_name 
+  kms_key_id              = aws_kms_key.a.id
   role_arn                = aws_iam_role.notebook_iam_role.arn
   instance_type           = var.instance_type
   lifecycle_config_name   = aws_sagemaker_notebook_instance_lifecycle_configuration.notebook_config.name
