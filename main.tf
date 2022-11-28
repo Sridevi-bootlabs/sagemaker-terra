@@ -5,16 +5,15 @@ resource "aws_sagemaker_notebook_instance" "notebook_instance" {
   lifecycle_config_name   = aws_sagemaker_notebook_instance_lifecycle_configuration.notebook_config.name
   default_code_repository = aws_sagemaker_code_repository.git_repo.code_repository_name
 }
-
-
-resource "aws_kms_alias" "a" {
-  name          = "alias/my-key-alias"
-  target_key_id = aws_kms_key.a.key_id
-}
 resource "aws_kms_key" "a" {
   description             = "KMS key 1"
   deletion_window_in_days = 10
 }
+
+
+
+
+
 resource "aws_sagemaker_notebook_instance_lifecycle_configuration" "notebook_config" {
   name      = var.notebook_config_name
   on_create = base64encode("echo foo") 
@@ -165,15 +164,5 @@ resource "aws_iam_policy" "policy"{
     ]
 })
    
-  })
-  
-  
-  
- 
-#   resource "aws_kms_key" "a" {}
-
-# resource "aws_kms_alias" "a" {
-#   name          = "alias/my-key-alias"
-#   target_key_id = aws_kms_key.a.key_id
-# }
-#  }
+#   })
+ }
