@@ -1,0 +1,9 @@
+notebook_instance_name = "aws-sm-notebook-instance"
+instance_type = "ml.t2.medium"
+notebook_config_name = "dev-platform-al-sm-lifecycle-config"
+# on_create = base64encode("echo foo")
+# on_start = base64encode("echo foo")
+code_repository_name = "aws-sm-notebook-instance-repo"
+notebook_iam_role_name = "notebook_iam_role"
+policy_name = "test_policy"
+description = "My test policy"
