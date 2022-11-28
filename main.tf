@@ -6,7 +6,6 @@ resource "aws_sagemaker_notebook_instance" "notebook_instance" {
   default_code_repository = aws_sagemaker_code_repository.git_repo.code_repository_name
 }
 
-  resource "aws_kms_key" "a" {}
 
 resource "aws_kms_alias" "a" {
   name          = "alias/my-key-alias"
@@ -166,7 +165,7 @@ resource "aws_iam_policy" "policy"{
     ]
 })
    
-#   })
+  })
   
   
   
