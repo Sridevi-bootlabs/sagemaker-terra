@@ -1,18 +1,23 @@
 resource "aws_sagemaker_notebook_instance" "notebook_instance" {
-  name                    = var.notebook_instance_name
+  name                    = var.notebook_instance_name 
   role_arn                = aws_iam_role.notebook_iam_role.arn
   instance_type           = var.instance_type
   lifecycle_config_name   = aws_sagemaker_notebook_instance_lifecycle_configuration.notebook_config.name
   default_code_repository = aws_sagemaker_code_repository.git_repo.code_repository_name
 }
-resource "aws_kms_key" "a" {
-  description             = "KMS key 1"
-  deletion_window_in_days = 10
+resource "aws_kms_key" "oauth_config" {
+  description = "oauth config"
+  is_enabled  = true
 }
 
+resource "aws_kms_ciphertext" "oauth" {
+  key_id = aws_kms_key.oauth_config.key_id
 
-
-
+  plaintext = <<EOF
+{
+  "client_id": "e587dbae22222f55da22",
+  "client_secret": "8289575d00000ace55e1815ec13673955721b8a5"
+}
 
 resource "aws_sagemaker_notebook_instance_lifecycle_configuration" "notebook_config" {
   name      = var.notebook_config_name
