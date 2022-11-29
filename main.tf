@@ -1,19 +1,11 @@
-
-resource "aws_kms_key" "a" {
-  description             = "KMS key 1"
-  deletion_window_in_days = 10
-}
-resource "aws_kms_grant" "a" {
-  name              =  "my-grant"
-  key_id            = aws_kms_key.a.key_id
-  grantee_principal = aws_iam_role.notebook_instance.arn
-  operations        = var.operations
-  constraints {
-    encryption_context_equals = {
-      Department = "Finance"
-  key_rotation_enabled = true
-    }
-  }
+resource "aws_kms_key" "primary" {
+  provider = aws.primary
+  description             = "Multi-Region primary key"
+  deletion_window_in_days = 30
+  multi_region            = true
+  # key_rotation_enabled = true
+ enable_key_rotation = true
+ is_enabled  = true
 }
 resource "aws_sagemaker_notebook_instance" "notebook_instance" {
   name                    = var.notebook_instance_name 
