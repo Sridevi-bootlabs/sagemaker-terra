@@ -6,7 +6,7 @@ resource "aws_kms_key" "a" {
 resource "aws_kms_grant" "a" {
   name              =  "my-grant"
   key_id            = aws_kms_key.a.key_id
-  grantee_principal = aws_iam_role.a.arn
+  grantee_principal = aws_iam_role.notebook_instance.arn
   operations        = var.operations
   constraints {
     encryption_context_equals = {
