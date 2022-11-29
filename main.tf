@@ -3,6 +3,18 @@ resource "aws_kms_key" "a" {
   description             = "KMS key 1"
   deletion_window_in_days = 10
 }
+resource "aws_kms_grant" "a" {
+  name              =  "my-grant"
+  key_id            = aws_kms_key.a.key_id
+  grantee_principal = aws_iam_role.a.arn
+  operations        = var.operations
+  constraints {
+    encryption_context_equals = {
+      Department = "Finance"
+  key_rotation_enabled = true
+    }
+  }
+}
 resource "aws_sagemaker_notebook_instance" "notebook_instance" {
   name                    = var.notebook_instance_name 
   kms_key_id              = aws_kms_key.a.id
