@@ -1,12 +1,12 @@
-resource "aws_kms_key" "primary" {
-  provider = aws.primary
-  description             = "Multi-Region primary key"
-  deletion_window_in_days = 30
-  multi_region            = true
-  key_rotation_enabled = true
-  enable_key_rotation = true
-  is_enabled  = true
-}
+# resource "aws_kms_key" "primary" {
+#   provider = aws.primary
+#   description             = "Multi-Region primary key"
+#   deletion_window_in_days = 30
+#   multi_region            = true
+#   key_rotation_enabled = true
+#   enable_key_rotation = true
+#   is_enabled  = true
+# }
 resource "aws_sagemaker_notebook_instance" "notebook_instance" {
   name                    = var.notebook_instance_name 
  kms_key_id              = aws_kms_key.primary.id
